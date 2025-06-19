@@ -1,4 +1,3 @@
-# dijkstra.py
 """
 Heap-based Dijkstra **with guard**:
 raises ValueError if *any* edge weight is negative.
