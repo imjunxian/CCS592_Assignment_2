@@ -7,6 +7,15 @@ from typing import List, Tuple, Set
 
 INF = float("inf")
 
+def extract_negative_cycle(parent, start):
+        cycle = [start]
+        cur = parent[start]
+        while cur != start:
+            cycle.append(cur)
+            cur = parent[cur]
+        cycle.append(start)  # complete the cycle
+        cycle.reverse()
+        return cycle
 
 def bellman_ford(n: int, edges, src: int = 0) -> Tuple[List[float], List[int], Set[int]]:
     # ------------------------------------------------------------------
@@ -44,5 +53,16 @@ def bellman_ford(n: int, edges, src: int = 0) -> Tuple[List[float], List[int], S
                 cur = parent[cur]
                 if cur == start:
                     break
+                            # back-walk n steps to ensure we're inside the cycle
+            cur = v
+            for _ in range(n):
+                cur = parent[cur]
+            cycle = extract_negative_cycle(parent, cur)
+            print("Negative cycle path:", cycle)
+            neg_vertices.update(cycle)
+
+    
+                    
+# ---------------------- Helper: Extract Negative Cycle ------------------------
 
     return dist, parent, neg_vertices
