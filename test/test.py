@@ -86,7 +86,10 @@ laps_needed = {v: int((dist_frozen[v] - dist_final[v]) / -cycle_weight)
 
 # ── 5. Console output ──────────────────────────────────────────────
 print("=== Bellman–Ford ===")
+print(f"Negative cycle vertices: {neg_cycle}")
 print(f"Negative cycle path: {cycle}")
+print(f"Negative cycle weight: {cycle_weight}")
+
 print(f"\nDistances (frozen) : {dist_frozen}")
 print("Shortest Paths from Source — frozen distances:")
 for v in range(V):
@@ -94,6 +97,7 @@ for v in range(V):
     path = path_with_laps(v, laps)
     note = f" (negative cycle taken {laps} time{'s'*(laps>1)})" if laps else ""
     print(f"Vertex {v}: Path = {path}, Total Cost = {dist_frozen[v]}{note}")
+
 print(f"\nFinal Distances    : {dist_final}")
 print("Shortest Paths from Source — final distances:")
 for v in range(V):
